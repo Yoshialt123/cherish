@@ -1,0 +1,1424 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff0f6">
+<title>For Cherish ♡</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --pink: #f8dce8;
+    --pink-dark: #e9b8ce;
+    --blue: #d99dbd;
+    --blue-dark: #b66f91;
+    --blue-light: #f9e2ec;
+    --cream: #fffaf7;
+    --ink: #806477;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 15% 20%, #fff 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 35%, #fff 0 2px, transparent 3px),
+        linear-gradient(145deg, #fff4f8, #fce8f0 55%, #fff2f7);
+    background-size: 90px 90px, 120px 120px, cover;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    border: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#stage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 18px;
+    position: relative;
+}
+
+/* DECORATIONS */
+
+.decor {
+    position: fixed;
+    pointer-events: none;
+    opacity: .65;
+    animation: float 5s ease-in-out infinite;
+    z-index: 0;
+}
+
+.decor.one {
+    top: 10%;
+    left: 8%;
+    font-size: 28px;
+}
+
+.decor.two {
+    right: 9%;
+    top: 20%;
+    font-size: 24px;
+    animation-delay: 1s;
+}
+
+.decor.three {
+    left: 12%;
+    bottom: 12%;
+    font-size: 22px;
+    animation-delay: 2s;
+}
+
+.decor.four {
+    right: 12%;
+    bottom: 10%;
+    font-size: 28px;
+    animation-delay: 1.5s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-13px) rotate(7deg);
+    }
+}
+
+/* ENVELOPE */
+
+.intro {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    transition: opacity .8s ease, transform .8s ease;
+}
+
+.intro.hide {
+    opacity: 0;
+    transform: translateY(-25px) scale(.95);
+    pointer-events: none;
+    position: absolute;
+}
+
+.intro h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(34px, 7vw, 56px);
+    font-weight: normal;
+    color: #c47f9f;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    color: #9c7489;
+}
+
+.envelope {
+    width: min(310px, 78vw);
+    height: 205px;
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    filter: drop-shadow(0 14px 18px #d7a8bd33);
+    transition: transform .3s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-5px);
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #f2c6d9;
+    border-radius: 8px;
+}
+
+.envelope-letter {
+    position: absolute;
+    width: 84%;
+    height: 80%;
+    left: 8%;
+    bottom: 5%;
+    background: #fffdfc;
+    border-radius: 5px;
+    padding: 25px 12px;
+    transition: transform 1s ease;
+    z-index: 2;
+    box-shadow: 0 2px 8px #c58ca522;
+}
+
+.envelope-letter span {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: #c47f9f;
+    font-size: 21px;
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    background: #f8dce8;
+    clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+    border-radius: 8px;
+    z-index: 3;
+}
+
+.envelope-flap {
+    position: absolute;
+    inset: 0;
+    background: #eab4cc;
+    clip-path: polygon(0 0, 100% 0, 50% 60%);
+    transform-origin: top;
+    transition: transform .8s ease;
+    z-index: 4;
+}
+
+.seal {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f0c4d8;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    z-index: 5;
+    box-shadow: 0 3px 8px #9e789055;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope.open .envelope-letter {
+    transform: translateY(-115px);
+}
+
+.open-hint {
+    margin-top: 25px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #9c7489;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: .45; }
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    width: min(850px, 100%);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 1s ease, transform 1s ease;
+    position: absolute;
+    z-index: 1;
+    visibility: hidden;
+}
+
+.main-content.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+    visibility: visible;
+}
+
+.main-content h2 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: normal;
+    font-size: clamp(32px, 6vw, 48px);
+    color: #bd7897;
+    margin-bottom: 7px;
+}
+
+.subtitle {
+    color: #a77b91;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+/* BOUQUET */
+
+.bouquet-wrap {
+    width: min(510px, 96vw);
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.bouquet-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    filter: drop-shadow(0 12px 12px #c58ca522);
+}
+
+.tulip {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center bottom;
+}
+
+#stage.opened .tulip {
+    animation: stemGrow 1.2s var(--delay, 0s) both cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes stemGrow {
+    from {
+        opacity: 0;
+        transform: scaleY(.05);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+.tulip-head {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+}
+
+#stage.opened .tulip-head {
+    animation: tulipBloom 1s calc(var(--delay, 0s) + .55s) both ease-out;
+}
+
+@keyframes tulipBloom {
+    from {
+        transform: scale(.15) rotate(-12deg);
+    }
+    to {
+        transform: scale(1) rotate(0);
+    }
+}
+
+.sway {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+    animation: sway 4s ease-in-out 2.5s infinite;
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-1.5deg); }
+    50% { transform: rotate(1.5deg); }
+}
+
+/* WRAPPING PAPER */
+
+.wrapper-shadow {
+    fill: #e8b6cc;
+    opacity: .22;
+}
+
+.wrapper-back {
+    fill: #f6d9e6;
+    stroke: #eab4cc;
+    stroke-width: 2;
+}
+
+.wrapper-side {
+    fill: #efc5d8;
+    stroke: #eab4cc;
+    stroke-width: 1.5;
+}
+
+.wrapper-front {
+    fill: url(#paperBlue);
+    stroke: #eab4cc;
+    stroke-width: 2;
+}
+
+.wrapper-fold {
+    fill: #efc5d8;
+    stroke: #eab4cc;
+    stroke-width: 1.5;
+}
+
+.wrapper-detail {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2;
+    opacity: .8;
+    stroke-linecap: round;
+}
+
+.ribbon {
+    fill: #f0bfd5;
+    stroke: #d99dbd;
+    stroke-width: 1.5;
+}
+
+.ribbon-detail {
+    fill: none;
+    stroke: #fff2f8;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+/* PAPER TOUCH EFFECT */
+
+.wrapper-front,
+.wrapper-side,
+.wrapper-fold,
+.wrapper-detail {
+    transition: filter .45s ease, opacity .45s ease;
+}
+
+.paper-crease {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    opacity: 0;
+    transition: opacity .4s ease;
+    pointer-events: none;
+}
+
+.paper-crease.shadow {
+    stroke: #d99dbd;
+    stroke-width: 2.5;
+}
+
+.bouquet-wrap.paper-touched .wrapper-front {
+    filter: brightness(1.08) drop-shadow(0 2px 3px #c58ca544);
+}
+
+.bouquet-wrap.paper-touched .wrapper-side {
+    filter: brightness(.91);
+}
+
+.bouquet-wrap.paper-touched .wrapper-fold {
+    filter: brightness(1.14);
+}
+
+.bouquet-wrap.paper-touched .paper-crease {
+    opacity: .9;
+}
+
+/* TEXT */
+
+.paper-hint {
+    font-size: 11px;
+    color: #a77b91;
+    letter-spacing: 1px;
+    margin-top: -4px;
+    margin-bottom: 18px;
+}
+
+.dedication {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: #bd829e;
+    font-size: clamp(17px, 4vw, 21px);
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+/* TOP CONTROLS */
+
+.top-controls {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+}
+
+#stage.opened .top-controls {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.top-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #ffffffdc;
+    color: #c47f9f;
+    border: 1px solid #f5dce7;
+    box-shadow: 0 4px 15px #c58ca522;
+    font-size: 20px;
+    display: grid;
+    place-items: center;
+    transition: .25s ease;
+}
+
+.top-icon:hover {
+    transform: translateY(-3px);
+    background: white;
+}
+
+.top-icon.playing {
+    background: #f9e7ef;
+    animation: musicPulse 1.5s infinite;
+}
+
+@keyframes musicPulse {
+    50% {
+        box-shadow: 0 0 0 6px #eab4cc35;
+    }
+}
+
+/* BACK TO ENVELOPE */
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #ffffffc9;
+    color: #c47f9f;
+    border: 1px solid #f5dce7;
+    border-radius: 25px;
+    padding: 10px 17px;
+    margin-top: 8px;
+    font-size: 12px;
+    box-shadow: 0 4px 15px #c58ca522;
+    transition: .25s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-3px);
+    background: white;
+}
+
+/* SIDE MENU */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: #536b8055;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .3s ease, visibility .3s;
+    z-index: 49;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.side-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: min(330px, 88vw);
+    height: 100vh;
+    height: 100dvh;
+    background: #fffafc;
+    z-index: 50;
+    padding: 78px 27px 30px;
+    box-shadow: -10px 0 30px #536b8022;
+    transform: translateX(105%);
+    transition: transform .4s ease;
+    text-align: left;
+    overflow-y: auto;
+}
+
+.side-menu.active {
+    transform: translateX(0);
+}
+
+.close-menu {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    background: transparent;
+    color: #bd829e;
+    font-size: 29px;
+    width: 40px;
+    height: 40px;
+}
+
+.side-menu h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: normal;
+    color: #c47f9f;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.side-menu > p {
+    color: #a77b91;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 23px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    text-decoration: none;
+    color: #9a7188;
+    padding: 17px 5px;
+    border-bottom: 1px solid #f1e2eb;
+    font-size: 14px;
+    transition: .25s ease;
+}
+
+.menu-link > span:first-child {
+    font-size: 19px;
+    min-width: 22px;
+}
+
+.menu-link strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.menu-link small {
+    display: block;
+    font-size: 11px;
+    color: #a77b91;
+    line-height: 1.5;
+}
+
+.menu-link:hover {
+    padding-left: 12px;
+    color: #cc86a6;
+    background: #fff3f7;
+}
+
+.menu-footer {
+    color: #b18b9f;
+    font-size: 11px;
+    line-height: 1.9;
+    margin-top: 28px;
+}
+
+/* FOOTER */
+
+.main-footer {
+    color: #b18b9f;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 18px;
+}
+
+/* TOAST */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translate(-50%, 20px);
+    background: #fffafc;
+    color: #bd829e;
+    padding: 13px 21px;
+    border-radius: 30px;
+    box-shadow: 0 5px 25px #8299b433;
+    font-size: 12px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+    white-space: nowrap;
+    max-width: 90vw;
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+/* MOBILE */
+
+@media(max-width:480px) {
+    #stage {
+        padding: 24px 12px;
+    }
+
+    .main-content h2 {
+        margin-top: 15px;
+    }
+
+    .bouquet-wrap {
+        width: 100%;
+    }
+
+    .top-controls {
+        top: 12px;
+        right: 12px;
+        gap: 8px;
+    }
+
+    .top-icon {
+        width: 41px;
+        height: 41px;
+    }
+
+    .decor.one { left: 4%; }
+    .decor.two { right: 4%; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="decor one">♡</div>
+<div class="decor two">✿</div>
+<div class="decor three">୨୧</div>
+<div class="decor four">♡</div>
+
+<div id="stage">
+
+    <!-- ENVELOPE INTRO -->
+
+    <section class="intro" id="intro">
+
+        <h1>A little something<br>for you ♡</h1>
+        <p>A bouquet made with love</p>
+
+        <div
+            class="envelope"
+            id="envelope"
+            onclick="openEnvelope()"
+            role="button"
+            tabindex="0"
+        >
+            <div class="envelope-back"></div>
+
+            <div class="envelope-letter">
+                <span>For Cherish ♡</span>
+            </div>
+
+            <div class="envelope-front"></div>
+            <div class="envelope-flap"></div>
+            <div class="seal">♡</div>
+        </div>
+
+        <div class="open-hint">TAP TO OPEN ♡</div>
+
+    </section>
+
+    <!-- MAIN BOUQUET -->
+
+    <main class="main-content" id="mainContent">
+
+        <h2>For Cherish ♡</h2>
+        <p class="subtitle">A little bouquet, just for you</p>
+
+        <div class="bouquet-wrap" id="bouquet" role="button" tabindex="0" aria-pressed="false">
+
+            <svg class="bouquet-svg" viewBox="0 0 500 520"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="A bouquet of pink tulips">
+
+                <defs>
+
+                    <linearGradient id="petalBlue" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#dcecff"/>
+                        <stop offset="48%" stop-color="#8fb9e5"/>
+                        <stop offset="100%" stop-color="#5f8fca"/>
+                    </linearGradient>
+
+                    <linearGradient id="petalLight" x1="0" y1="0" x2=".8" y2="1">
+                        <stop offset="0%" stop-color="#eef6ff"/>
+                        <stop offset="100%" stop-color="#91b9e4"/>
+                    </linearGradient>
+
+                    <linearGradient id="paperBlue" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#fff1f6"/>
+                        <stop offset="100%" stop-color="#eabbd0"/>
+                    </linearGradient>
+
+                    <linearGradient id="leafGreen" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#a9c9b0"/>
+                        <stop offset="100%" stop-color="#648f7b"/>
+                    </linearGradient>
+
+                </defs>
+
+                <!-- BACK PAPER -->
+
+                <path class="wrapper-shadow"
+                    d="M90 285 Q250 340 410 285 L340 495 Q250 515 160 495 Z"/>
+
+                <path class="wrapper-back"
+                    d="M105 275 Q250 315 395 275 L340 480 Q250 505 160 480 Z"/>
+
+                <path class="wrapper-side"
+                    d="M105 275 L225 355 L160 480 L70 315 Z"/>
+
+                <path class="wrapper-side"
+                    d="M395 275 L275 355 L340 480 L430 315 Z"/>
+
+                <!-- STEMS -->
+
+                <g fill="none" stroke="#719b83" stroke-width="6" stroke-linecap="round">
+                    <path d="M250 360 Q230 250 125 130"/>
+                    <path d="M250 360 Q250 235 190 100"/>
+                    <path d="M250 360 Q265 220 250 75"/>
+                    <path d="M250 360 Q285 235 315 105"/>
+                    <path d="M250 360 Q315 260 375 150"/>
+                    <path d="M250 360 Q205 250 65 195"/>
+                    <path d="M250 360 Q320 265 435 205"/>
+                </g>
+
+                <!-- LEAVES -->
+
+                <g fill="url(#leafGreen)" stroke="#648f7b" stroke-width="1.5">
+                    <path d="M220 330 Q125 270 130 190 Q210 235 220 330Z"/>
+                    <path d="M228 345 Q135 320 95 255 Q190 270 228 345Z"/>
+                    <path d="M265 340 Q350 265 360 195 Q285 230 265 340Z"/>
+                    <path d="M278 355 Q370 325 410 260 Q315 275 278 355Z"/>
+                    <path d="M240 330 Q195 245 210 180 Q270 245 240 330Z"/>
+                    <path d="M260 340 Q300 245 290 175 Q240 245 260 340Z"/>
+                </g>
+
+                <g fill="none" stroke="#d4e5d4" stroke-width="1.5" opacity=".8">
+                    <path d="M220 330 Q175 260 130 190"/>
+                    <path d="M228 345 Q165 295 95 255"/>
+                    <path d="M265 340 Q320 260 360 195"/>
+                    <path d="M278 355 Q345 310 410 260"/>
+                </g>
+
+                <!-- TULIP 1 -->
+
+                <g class="tulip" style="--delay:.05s">
+                    <g transform="translate(125 130)">
+                        <g class="sway">
+                            <g class="tulip-head">
+                                <path d="M-29 8 Q-34 -25 -18 -43 Q-8 -25 0 -47 Q10 -26 20 -43 Q35 -20 29 8 Q15 25 0 20 Q-17 25 -29 8Z"
+                                    fill="url(#petalBlue)" stroke="#5f8fca" stroke-width="2"/>
+                                <path d="M-18 -34 Q-14 -7 -8 12 M0 -39 Q2 -8 0 15 M19 -34 Q13 -8 9 12"
+                                    fill="none" stroke="#fff2f7" stroke-width="3" opacity=".7"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- TULIP 2 -->
+
+                <g class="tulip" style="--delay:.2s">
+                    <g transform="translate(190 100)">
+                        <g class="sway">
+                            <g class="tulip-head">
+                                <path d="M-27 9 Q-32 -23 -17 -42 Q-8 -24 0 -48 Q10 -26 18 -42 Q33 -19 27 9 Q14 24 0 20 Q-16 24 -27 9Z"
+                                    fill="url(#petalLight)" stroke="#83a9d3" stroke-width="2"/>
+                                <path d="M-17 -33 Q-13 -8 -7 12 M0 -39 L0 14 M17 -33 Q12 -8 7 12"
+                                    fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- TULIP 3 -->
+
+                <g class="tulip" style="--delay:.35s">
+                    <g transform="translate(250 75)">
+                        <g class="sway">
+                            <g class="tulip-head">
+                                <path d="M-30 10 Q-35 -25 -18 -46 Q-9 -27 0 -52 Q10 -27 19 -46 Q35 -20 30 10 Q15 27 0 21 Q-18 27 -30 10Z"
+                                    fill="url(#petalBlue)" stroke="#5f8fca" stroke-width="2"/>
+                                <path d="M-18 -37 Q-14 -5 -8 13 M0 -43 L0 15 M18 -37 Q14 -5 8 13"
+                                    fill="none" stroke="#fff2f7" stroke-width="3" opacity=".8"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- TULIP 4 -->
+
+                <g class="tulip" style="--delay:.5s">
+                    <g transform="translate(315 105)">
+                        <g class="sway">
+                            <g class="tulip-head">
+                                <path d="M-28 9 Q-33 -23 -17 -42 Q-8 -24 0 -47 Q9 -25 18 -42 Q34 -19 28 9 Q14 25 0 20 Q-16 25 -28 9Z"
+                                    fill="url(#petalLight)" stroke="#83a9d3" stroke-width="2"/>
+                                <path d="M-17 -33 Q-13 -8 -7 12 M0 -39 L0 14 M17 -33 Q13 -8 7 12"
+                                    fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- TULIP 5 -->
+
+                <g class="tulip" style="--delay:.65s">
+                    <g transform="translate(375 150)">
+                        <g class="sway">
+                            <g class="tulip-head">
+                                <path d="M-28 9 Q-33 -23 -17 -42 Q-8 -24 0 -47 Q9 -25 18 -42 Q34 -19 28 9 Q14 25 0 20 Q-16 25 -28 9Z"
+                                    fill="url(#petalBlue)" stroke="#5f8fca" stroke-width="2"/>
+                                <path d="M-17 -33 Q-13 -8 -7 12 M0 -39 L0 14 M17 -33 Q13 -8 7 12"
+                                    fill="none" stroke="#fff2f7" stroke-width="3" opacity=".8"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- TULIP 6 -->
+
+                <g class="tulip" style="--delay:.8s">
+                    <g transform="translate(65 195)">
+                        <g class="sway">
+                            <g class="tulip-head">
+                                <path d="M-27 9 Q-32 -23 -17 -42 Q-8 -24 0 -47 Q9 -25 18 -42 Q33 -19 27 9 Q14 25 0 20 Q-16 25 -27 9Z"
+                                    fill="url(#petalLight)" stroke="#83a9d3" stroke-width="2"/>
+                                <path d="M-17 -33 Q-13 -8 -7 12 M0 -39 L0 14 M17 -33 Q13 -8 7 12"
+                                    fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- TULIP 7 -->
+
+                <g class="tulip" style="--delay:.95s">
+                    <g transform="translate(435 205)">
+                        <g class="sway">
+                            <g class="tulip-head">
+                                <path d="M-27 9 Q-32 -23 -17 -42 Q-8 -24 0 -47 Q9 -25 18 -42 Q33 -19 27 9 Q14 25 0 20 Q-16 25 -27 9Z"
+                                    fill="url(#petalBlue)" stroke="#5f8fca" stroke-width="2"/>
+                                <path d="M-17 -33 Q-13 -8 -7 12 M0 -39 L0 14 M17 -33 Q13 -8 7 12"
+                                    fill="none" stroke="#fff2f7" stroke-width="3" opacity=".8"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+
+                <!-- FRONT WRAPPER -->
+
+                <g class="paper-front-motion">
+
+                    <path class="wrapper-front"
+                        d="M115 295 Q250 365 385 295 L335 475 Q250 500 165 475 Z"/>
+
+                    <path class="wrapper-fold"
+                        d="M115 295 L220 375 L165 475 Z"/>
+
+                    <path class="wrapper-fold"
+                        d="M385 295 L280 375 L335 475 Z"/>
+
+                    <path class="wrapper-detail"
+                        d="M133 320 Q165 385 176 450"/>
+
+                    <path class="wrapper-detail"
+                        d="M367 320 Q335 385 324 450"/>
+
+                    <path class="wrapper-detail"
+                        d="M250 390 Q250 435 250 475"/>
+
+                    <!-- FOLDED PAPER CREASES -->
+
+                    <g class="interactive-creases">
+
+                        <path class="paper-crease"
+                            d="M125 310 Q155 370 175 455"/>
+
+                        <path class="paper-crease shadow"
+                            d="M220 375 Q205 420 165 475"/>
+
+                        <path class="paper-crease"
+                            d="M375 310 Q345 370 325 455"/>
+
+                        <path class="paper-crease shadow"
+                            d="M280 375 Q295 420 335 475"/>
+
+                        <path class="paper-crease"
+                            d="M250 405 Q245 445 250 480"/>
+
+                        <path class="paper-crease shadow"
+                            d="M140 350 Q165 395 190 440"/>
+
+                        <path class="paper-crease shadow"
+                            d="M360 350 Q335 395 310 440"/>
+
+                    </g>
+
+                </g>
+
+                <!-- RIBBON -->
+
+                <path class="ribbon"
+                    d="M165 365 Q250 385 335 365 L328 395 Q250 415 172 395 Z"/>
+
+                <path class="ribbon-detail"
+                    d="M184 378 Q250 398 316 378"/>
+
+                <!-- BOW -->
+
+                <path class="ribbon"
+                    d="M250 380
+                       C218 345 190 350 197 377
+                       C205 398 231 391 250 380
+                       C269 391 295 398 303 377
+                       C310 350 282 345 250 380Z"/>
+
+                <path class="ribbon"
+                    d="M250 380 Q218 405 222 430 Q245 423 255 390Z"/>
+
+                <path class="ribbon"
+                    d="M250 380 Q282 405 278 430 Q255 423 245 390Z"/>
+
+                <circle cx="250" cy="381" r="10"
+                    fill="#e8abc8"
+                    stroke="#d99dbd"
+                    stroke-width="1.5"/>
+
+                <!-- SPARKLES -->
+
+                <g fill="#fff" opacity=".95">
+                    <path d="M72 95 L77 108 L90 113 L77 118 L72 131 L67 118 L54 113 L67 108Z"/>
+                    <path d="M414 70 L418 80 L428 84 L418 88 L414 98 L410 88 L400 84 L410 80Z"/>
+                    <path d="M420 335 L424 344 L433 348 L424 352 L420 361 L416 352 L407 348 L416 344Z"/>
+                    <path d="M105 360 L109 369 L118 373 L109 377 L105 386 L101 377 L92 373 L101 369Z"/>
+                </g>
+
+            </svg>
+        </div>
+
+        <p class="paper-hint">
+            ✧ Tap the wrapping paper to reveal its little folds ♡
+        </p>
+
+        <p class="dedication">
+            "May beautiful things keep finding their way to you." ♡
+        </p>
+
+        <button class="back-button" onclick="returnToEnvelope()">
+            ← Back to the envelope
+        </button>
+
+        <footer class="main-footer">
+            <br>MADE WITH LOVE, JUST FOR YOU ♡
+        </footer>
+
+    </main>
+
+    <!-- TOP RIGHT ICONS -->
+
+    <div class="top-controls">
+
+        <button class="top-icon"
+            id="musicButton"
+            onclick="toggleMusic()"
+            aria-label="Play music">
+            ♫
+        </button>
+
+        <button class="top-icon"
+            onclick="toggleMenu()"
+            aria-label="Open menu">
+            ☰
+        </button>
+
+    </div>
+
+</div>
+
+<!-- SIDE MENU -->
+
+<div class="menu-overlay" id="menuOverlay"
+    onclick="toggleMenu()"></div>
+
+<nav class="side-menu" id="sideMenu" aria-hidden="true">
+
+    <button class="close-menu"
+        onclick="toggleMenu()"
+        aria-label="Close menu">×</button>
+
+    <h3>A little menu</h3>
+
+    <p>
+        There are more little things being prepared
+        for this garden.
+    </p>
+
+    <a href="#bouquet" class="menu-link"
+        onclick="toggleMenu()">
+        <span>✿</span>
+        <span>
+            <strong>The Bouquet</strong>
+            <small>You're right here ♡</small>
+        </span>
+    </a>
+
+    <a href="#" class="menu-link"
+        onclick="comingSoon(event, 'Little Notes')">
+        <span>♡</span>
+        <span>
+            <strong>Little Notes</strong>
+            <small>Letters to keep close — coming soon</small>
+        </span>
+    </a>
+
+    <a href="#" class="menu-link"
+        onclick="comingSoon(event, 'Note of the Day')">
+        <span>☼</span>
+        <span>
+            <strong>Note of the Day</strong>
+            <small>A little thought for each day — coming soon</small>
+        </span>
+    </a>
+
+    <a href="#" class="menu-link"
+        onclick="comingSoon(event, 'The Cherish Tree')">
+        <span>❀</span>
+        <span>
+            <strong>The Cherish Tree</strong>
+            <small>A garden that will grow — coming soon</small>
+        </span>
+    </a>
+
+    <div class="menu-footer">
+        This garden is still growing.
+        More surprises will bloom here soon. ♡
+    </div>
+
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+
+/* ELEMENTS */
+
+const stage = document.getElementById('stage');
+const envelope = document.getElementById('envelope');
+const intro = document.getElementById('intro');
+const mainContent = document.getElementById('mainContent');
+const bouquetWrap = document.getElementById('bouquet');
+
+const sideMenu = document.getElementById('sideMenu');
+const menuOverlay = document.getElementById('menuOverlay');
+const musicButton = document.getElementById('musicButton');
+
+let hasOpened = false;
+let audioContext = null;
+let musicPlaying = false;
+let musicTimer = null;
+let noteIndex = 0;
+let toastTimer = null;
+
+/* OPEN ENVELOPE */
+
+function openEnvelope() {
+
+    if (hasOpened) return;
+
+    hasOpened = true;
+
+    envelope.classList.add('open');
+
+    setTimeout(() => {
+
+        intro.classList.add('hide');
+
+        stage.classList.add('opened');
+
+        mainContent.classList.add('show');
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+    }, 900);
+}
+
+/* RETURN TO ENVELOPE */
+
+function returnToEnvelope() {
+
+    // Close the menu first if it is open.
+    if (sideMenu.classList.contains('active')) {
+        toggleMenu();
+    }
+
+    // Remove the bouquet animation state.
+    stage.classList.remove('opened');
+
+    // Hide the bouquet.
+    mainContent.classList.remove('show');
+
+    // Reset paper appearance.
+    bouquetWrap.classList.remove('paper-touched');
+    bouquetWrap.setAttribute('aria-pressed', 'false');
+
+    // Reset envelope.
+    envelope.classList.remove('open');
+
+    // Restore the intro.
+    intro.classList.remove('hide');
+
+    // Allow the envelope to open again.
+    hasOpened = false;
+
+    // Return to the top.
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+/* KEYBOARD ENVELOPE */
+
+envelope.addEventListener('keydown', function(event) {
+
+    if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openEnvelope();
+    }
+
+});
+
+/* INTERACTIVE PAPER */
+
+function touchPaper() {
+
+    const touched =
+        bouquetWrap.classList.toggle('paper-touched');
+
+    bouquetWrap.setAttribute(
+        'aria-pressed',
+        String(touched)
+    );
+
+}
+
+bouquetWrap.addEventListener('click', touchPaper);
+
+bouquetWrap.addEventListener('keydown', function(event) {
+
+    if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        touchPaper();
+    }
+
+});
+
+/* MENU */
+
+function toggleMenu() {
+
+    const isOpen = sideMenu.classList.toggle('active');
+
+    menuOverlay.classList.toggle('active', isOpen);
+
+    sideMenu.setAttribute(
+        'aria-hidden',
+        String(!isOpen)
+    );
+
+    document.body.style.overflow =
+        isOpen ? 'hidden' : '';
+
+}
+
+document.addEventListener('keydown', function(event) {
+
+    if (event.key === 'Escape' &&
+        sideMenu.classList.contains('active')) {
+
+        toggleMenu();
+
+    }
+
+});
+
+/* COMING SOON */
+
+function comingSoon(event, name) {
+
+    event.preventDefault();
+
+    toggleMenu();
+
+    const toast = document.getElementById('toast');
+
+    toast.textContent = name + ' is coming soon! ♡';
+
+    toast.classList.add('show');
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+
+        toast.classList.remove('show');
+
+    }, 2600);
+
+}
+
+/* AMBIENT MUSIC */
+
+function playChime() {
+
+    if (!audioContext || !musicPlaying) return;
+
+    const notes = [
+        523.25,
+        659.25,
+        783.99,
+        659.25,
+        587.33,
+        698.46
+    ];
+
+    const frequency = notes[noteIndex % notes.length];
+
+    noteIndex++;
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = 'sine';
+    oscillator.frequency.value = frequency;
+
+    gain.gain.setValueAtTime(
+        0.0001,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.045,
+        audioContext.currentTime + 0.08
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioContext.currentTime + 1.1
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+
+    oscillator.stop(audioContext.currentTime + 1.15);
+
+}
+
+/* MUSIC TOGGLE */
+
+async function toggleMusic() {
+
+    if (!audioContext) {
+
+        const AudioContextClass =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        if (!AudioContextClass) {
+            showToast('Your browser does not support music. ♡');
+            return;
+        }
+
+        audioContext = new AudioContextClass();
+
+    }
+
+    if (audioContext.state === 'suspended') {
+        await audioContext.resume();
+    }
+
+    musicPlaying = !musicPlaying;
+
+    if (musicPlaying) {
+
+        musicButton.classList.add('playing');
+
+        musicButton.setAttribute('aria-label', 'Pause music');
+
+        playChime();
+
+        musicTimer = setInterval(playChime, 1300);
+
+    } else {
+
+        musicButton.classList.remove('playing');
+
+        musicButton.setAttribute('aria-label', 'Play music');
+
+        clearInterval(musicTimer);
+
+    }
+
+}
+
+/* TOAST */
+
+function showToast(message) {
+
+    const toast = document.getElementById('toast');
+
+    toast.textContent = message;
+
+    toast.classList.add('show');
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+
+        toast.classList.remove('show');
+
+    }, 2600);
+
+}
+
+</script>
+
+</body>
+</html>

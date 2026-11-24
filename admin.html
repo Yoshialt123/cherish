@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff1f6">
+<title>Cherisg · Little Garden Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#fff2f7;--paper:#fffafc;--pink:#f4cddd;--pink2:#e9b2c9;--rose:#bd7897;--rose-dark:#965b78;--ink:#574653;--muted:#967f8d;--line:#f0dce5;--blue:#8eb6df;--blue-soft:#e7f1fc;--green:#6e9a7d;--shadow:0 18px 50px #b9799718}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 8% 12%,#fff 0 2px,transparent 3px),radial-gradient(circle at 88% 30%,#fff 0 2px,transparent 3px),linear-gradient(140deg,#fff5f8,#fceaf1 55%,#fff7fa);background-size:100px 100px,130px 130px,cover;color:var(--ink);font-family:Quicksand,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:24px}.login-card{width:min(440px,100%);background:#fffafceF;border:1px solid #fff;border-radius:28px;padding:36px;box-shadow:var(--shadow);text-align:center;backdrop-filter:blur(12px)}.flower-mark{width:64px;height:64px;margin:0 auto 14px;border-radius:22px;background:linear-gradient(145deg,#f8dce8,#f2c4d7);display:grid;place-items:center;font-size:30px;color:var(--rose-dark);box-shadow:0 8px 20px #d99dbd35}.eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--rose);font-weight:700}.login-card h1,.welcome h1{font:38px 'DM Serif Display',serif;margin:8px 0}.sub{color:var(--muted);font-size:13px;line-height:1.7}.field{text-align:left;margin:18px 0}.field label{display:block;font-size:12px;font-weight:700;margin:0 0 8px 4px;color:#765e6d}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:#fff;border-radius:13px;padding:13px 14px;outline:none;color:var(--ink);transition:.2s}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--pink2);box-shadow:0 0 0 4px #f4cddd35}.btn{border:0;border-radius:13px;padding:13px 18px;font-weight:700;transition:.2s}.btn:hover{transform:translateY(-1px);filter:brightness(.99)}.primary{background:linear-gradient(135deg,#d994b1,#bd7897);color:#fff;box-shadow:0 8px 18px #bd789733}.soft{background:#f9e6ee;color:var(--rose-dark)}.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}.danger{background:#fff0f1;color:#b35d6a}.wide{width:100%}.message{min-height:20px;margin:12px 0 0;color:#a65f7d;font-size:12px}
+.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#fffafceF;border-right:1px solid #f0dce5;padding:25px 17px;display:flex;flex-direction:column;flex-shrink:0}.brand{display:flex;align-items:center;gap:11px;padding:3px 9px 30px}.brand-icon{width:40px;height:40px;border-radius:14px;background:#f8dce8;display:grid;place-items:center;font-size:21px}.brand strong{font:22px 'DM Serif Display',serif}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px}.nav-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b49aa8;font-weight:700;padding:12px 12px 8px}.nav-btn{border:0;background:transparent;text-align:left;color:#806b79;padding:12px;border-radius:12px;margin:2px 0;font-weight:700;font-size:13px}.nav-btn span{display:inline-block;width:27px;font-size:16px}.nav-btn.active,.nav-btn:hover{background:#f9e6ee;color:var(--rose-dark)}.side-bottom{margin-top:auto;border-top:1px solid var(--line);padding:18px 8px 0}.userline{font-size:11px;color:var(--muted);overflow-wrap:anywhere;margin-bottom:12px}
+.main{flex:1;min-width:0;padding:30px clamp(18px,4vw,54px) 50px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:32px}.welcome h1{font-size:34px}.welcome p{margin:0;color:var(--muted);font-size:13px}.top-actions{display:flex;align-items:center;gap:10px}.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#f4d5e2;color:var(--rose-dark);font-weight:700}.panel{background:#fffafceF;border:1px solid #fff;border-radius:22px;padding:22px;box-shadow:var(--shadow)}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-bottom:20px}.stat{display:flex;align-items:center;gap:14px}.stat-icon{width:46px;height:46px;border-radius:15px;background:#fae6ee;display:grid;place-items:center;font-size:21px}.stat:nth-child(2) .stat-icon{background:var(--blue-soft)}.stat:nth-child(3) .stat-icon{background:#edf5ed}.stat small{display:block;color:var(--muted);font-size:11px}.stat strong{font:27px 'DM Serif Display',serif}.content-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(270px,.75fr);gap:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.panel-head h2{font:23px 'DM Serif Display',serif;margin:0}.panel-head p{margin:4px 0 0;color:var(--muted);font-size:11px}.item-list{display:grid;gap:10px}.item{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}.item-title{font-weight:700;font-size:13px}.item-meta{font-size:10px;color:var(--muted);margin-top:4px}.item-actions{display:flex;gap:6px}.mini{border:0;border-radius:9px;padding:8px 10px;font-size:11px;font-weight:700}.empty{padding:25px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed var(--line);border-radius:14px}.form-panel{margin-top:18px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field textarea{min-height:110px;resize:vertical}.checkline{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin:10px 0 16px}.checkline input{accent-color:var(--rose)}.note-preview{background:linear-gradient(135deg,#fff3f7,#fff);border:1px solid var(--line);border-radius:16px;padding:16px;min-height:130px}.note-preview h3{font:21px 'DM Serif Display',serif;margin:0 0 8px}.note-preview p{font-size:12px;line-height:1.7;color:#806b79;white-space:pre-wrap}.status{font-size:10px;font-weight:700;border-radius:20px;padding:5px 8px;background:#edf5ed;color:#64886d}.status.draft{background:#f3eef2;color:#927e8b}.notice{font-size:11px;color:var(--muted);line-height:1.6;margin-top:12px}
+@media(max-width:850px){.sidebar{width:205px}.content-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}@media(max-width:620px){.app{display:block}.sidebar{width:100%;padding:12px;display:block;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:4px 7px 12px}.sidebar nav{display:flex;overflow:auto;gap:5px}.nav-label{display:none}.nav-btn{white-space:nowrap;padding:10px}.side-bottom{display:none}.main{padding:22px 14px 40px}.topbar{align-items:flex-start}.welcome h1{font-size:28px}.stats{gap:9px}.stat{padding:13px;gap:8px}.stat-icon{width:36px;height:36px}.stat strong{font-size:22px}.panel{padding:16px}.form-row{grid-template-columns:1fr}.item{align-items:flex-start}.item-actions{flex-direction:column}}
+</style>
+</head>
+<body>
+<section class="login-wrap" id="loginView">
+  <div class="login-card">
+    <div class="flower-mark">✿</div><div class="eyebrow">A little garden · private area</div>
+    <h1>Welcome back ♡</h1><p class="sub">Sign in to tend to Cherish's little garden.</p>
+    <form id="loginForm">
+      <div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="username" placeholder="you@example.com" required></div>
+      <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Your password" required></div>
+      <button class="btn primary wide" id="loginBtn" type="submit">Enter the garden ♡</button>
+    </form>
+    <p class="message" id="loginMessage" aria-live="polite"></p>
+    <p class="notice">Only the authorized garden admin can sign in here.</p>
+  </div>
+</section>
+
+<div class="app hidden" id="appView">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">✿</div><div><strong>Cherisg</strong><small>THE LITTLE GARDEN</small></div></div>
+    <div class="nav-label">Workspace</div>
+    <nav>
+      <button class="nav-btn active" data-page="overview"><span>⌂</span>Overview</button>
+      <button class="nav-btn" data-page="daily"><span>☼</span>Daily Notes</button>
+      <button class="nav-btn" data-page="sticky"><span>♡</span>Little Notes</button>
+    </nav>
+    <div class="side-bottom"><div class="userline" id="signedInAs"></div><button class="btn outline wide" id="logoutBtn">↪ Sign out</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="welcome"><div class="eyebrow">YOUR PRIVATE CORNER</div><h1 id="pageTitle">A lovely day to create ♡</h1><p id="pageSubtitle">A little space to care for the things you make.</p></div><div class="top-actions"><div class="avatar">Y</div></div></header>
+    <section id="overviewPage">
+      <div class="stats">
+        <div class="panel stat"><div class="stat-icon">♡</div><div><small>Little notes</small><strong id="stickyCount">—</strong></div></div>
+        <div class="panel stat"><div class="stat-icon">☼</div><div><small>Daily notes</small><strong id="dailyCount">—</strong></div></div>
+        <div class="panel stat"><div class="stat-icon">✿</div><div><small>Published</small><strong id="publishedCount">—</strong></div></div>
+      </div>
+      <div class="content-grid">
+        <section class="panel"><div class="panel-head"><div><h2>Recently added</h2><p>Your newest garden entries</p></div></div><div class="item-list" id="recentList"><div class="empty">Loading your little garden…</div></div></section>
+        <section class="panel"><div class="panel-head"><div><h2>A gentle reminder</h2><p>Keep this space lovely</p></div></div><div class="note-preview"><h3>Little things matter ♡</h3><p>Write something kind, save it as a draft, and publish it whenever you're ready.</p></div><p class="notice">Published entries are intended to be readable by the public website. Drafts stay private when the supplied database policies are applied.</p></section>
+      </div>
+    </section>
+    <section id="editorPage" class="hidden">
+      <div class="content-grid">
+        <section class="panel"><div class="panel-head"><div><h2 id="editorHeading">Daily notes</h2><p id="editorDescription">Write a thought for the garden.</p></div><button class="btn soft" id="newEntryBtn">＋ New</button></div><div class="item-list" id="entryList"><div class="empty">Loading…</div></div></section>
+        <section class="panel">
+          <div class="panel-head"><div><h2 id="formHeading">Create an entry</h2><p>Every little note has a place.</p></div></div>
+          <form id="entryForm">
+            <div class="field"><label for="entryTitle">Title</label><input id="entryTitle" maxlength="120" required placeholder="A little thought…"></div>
+            <div class="field"><label for="entryContent">Message</label><textarea id="entryContent" required placeholder="Write something kind…"></textarea></div>
+            <div class="field" id="dateField"><label for="entryDate">Date</label><input id="entryDate" type="date"></div>
+            <div class="checkline"><input id="published" type="checkbox"><label for="published">Publish this entry on the website</label></div>
+            <div class="form-row"><button class="btn primary" type="submit" id="saveBtn">Save entry ♡</button><button class="btn outline" type="button" id="cancelBtn">Clear</button></div>
+            <p class="message" id="formMessage" aria-live="polite"></p>
+          </form>
+        </section>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(() => {
+  // Paste your Supabase project URL and anon/public key here.
+  const SUPABASE_URL = "https://jeakihgmptjymojjmcka.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_GAY0mRoneARwI6RcRKT2lg_PtEiItCZ";
+  const ADMIN_USER_ID = "7c4ee1d5-fcca-4ca4-873f-1df1d3f7550b";
+
+  const $ = id => document.getElementById(id);
+  const clientReady = SUPABASE_URL.startsWith("https://") && !SUPABASE_ANON_KEY.startsWith("YOUR_");
+  let db = null, currentUser = null, currentType = "daily", editingId = null, cache = {daily:[],sticky:[]};
+
+  if (clientReady && window.supabase) db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const tables = {daily:"daily_notes", sticky:"sticky_notes"};
+  const titles = {daily:["Daily Notes","A thought for each day"], sticky:["Little Notes","Letters and little things to keep close"]};
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  const msg = (id, text, bad=false) => { $(id).textContent = text; $(id).style.color = bad ? "#b35d6a" : "#a65f7d"; };
+  const showLogin = () => { $("loginView").classList.remove("hidden"); $("appView").classList.add("hidden"); };
+  const showApp = () => { $("loginView").classList.add("hidden"); $("appView").classList.remove("hidden"); $("signedInAs").textContent = currentUser?.email || ""; };
+
+  async function requireConfig() {
+    if (!db) throw new Error("Add your Supabase project URL and anon public key inside admin.html first.");
+  }
+  async function signIn(email,password) {
+    await requireConfig();
+    const {data,error} = await db.auth.signInWithPassword({email,password});
+    if(error) throw error;
+    currentUser = data.user;
+    if(currentUser.id !== ADMIN_USER_ID) { await db.auth.signOut(); currentUser=null; throw new Error("This account is not the authorized garden admin."); }
+    showApp(); await refreshAll();
+  }
+  async function load(type) {
+    const {data,error} = await db.from(tables[type]).select("*").order("created_at",{ascending:false});
+    if(error) throw error;
+    cache[type] = data || [];
+  }
+  async function refreshAll() {
+    try {
+      await Promise.all([load("daily"),load("sticky")]);
+      $("dailyCount").textContent = cache.daily.length;
+      $("stickyCount").textContent = cache.sticky.length;
+      $("publishedCount").textContent = [...cache.daily,...cache.sticky].filter(x=>x.is_published).length;
+      const recent = [...cache.daily.map(x=>({...x,_type:"daily"})),...cache.sticky.map(x=>({...x,_type:"sticky"}))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,5);
+      $("recentList").innerHTML = recent.length ? recent.map(itemRow).join("") : '<div class="empty">Your garden is waiting for its first little note ♡</div>';
+      $("recentList").querySelectorAll("[data-edit]").forEach(b=>b.addEventListener("click",()=>openEditor(b.dataset.type,b.dataset.edit)));
+      $("recentList").querySelectorAll("[data-delete]").forEach(b=>b.addEventListener("click",()=>removeEntry(b.dataset.type,b.dataset.delete)));
+      if(!$("editorPage").classList.contains("hidden")) renderEntries();
+    } catch(e) { $("recentList").innerHTML = `<div class="empty">${esc(e.message)}</div>`; }
+  }
+  function itemRow(x) {
+    const type=x._type || currentType;
+    return `<div class="item"><div><div class="item-title">${esc(x.title || "Untitled")}</div><div class="item-meta">${type==="daily"?"Daily note":"Little note"} · ${x.is_published?'<span class="status">Published</span>':'<span class="status draft">Draft</span>'}</div></div><div class="item-actions"><button class="mini soft" data-edit="${esc(x.id)}" data-type="${type}">Edit</button><button class="mini danger" data-delete="${esc(x.id)}" data-type="${type}">Delete</button></div></div>`;
+  }
+  function renderEntries() {
+    const rows=cache[currentType];
+    $("entryList").innerHTML=rows.length?rows.map(x=>itemRow({...x,_type:currentType})).join(""):'<div class="empty">Nothing here yet. Create the first one ♡</div>';
+    $("entryList").querySelectorAll("[data-edit]").forEach(b=>b.addEventListener("click",()=>openEditor(currentType,b.dataset.edit)));
+    $("entryList").querySelectorAll("[data-delete]").forEach(b=>b.addEventListener("click",()=>removeEntry(currentType,b.dataset.delete)));
+  }
+  function clearForm() {
+    editingId=null; $("entryForm").reset(); $("formHeading").textContent="Create an entry"; $("saveBtn").textContent="Save entry ♡"; msg("formMessage","");
+    $("dateField").classList.toggle("hidden",currentType!=="daily");
+  }
+  function openEditor(type,id) {
+    currentType=type; editingId=id; const row=cache[type].find(x=>x.id===id);
+    if(type!==currentType) return;
+    $("entryTitle").value=row?.title||""; $("entryContent").value=row?.content||""; $("published").checked=!!row?.is_published;
+    $("entryDate").value=row?.note_date||new Date().toISOString().slice(0,10);
+    $("formHeading").textContent="Edit an entry"; $("saveBtn").textContent="Update entry ♡";
+    $("dateField").classList.toggle("hidden",type!=="daily");
+    $("pageTitle").textContent="A little edit ♡"; $("pageSubtitle").textContent="Make this note just right.";
+    $("overviewPage").classList.add("hidden"); $("editorPage").classList.remove("hidden");
+    $("editorHeading").textContent=titles[type][0]; $("editorDescription").textContent=titles[type][1];
+    document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===type));
+    renderEntries();
+  }
+  function goPage(page) {
+    if(page==="overview") {
+      $("overviewPage").classList.remove("hidden"); $("editorPage").classList.add("hidden");
+      $("pageTitle").textContent="A lovely day to create ♡"; $("pageSubtitle").textContent="A little space to care for the things you make.";
+    } else {
+      currentType=page; clearForm();
+      $("overviewPage").classList.add("hidden"); $("editorPage").classList.remove("hidden");
+      $("pageTitle").textContent=titles[page][0]; $("pageSubtitle").textContent=titles[page][1];
+      $("editorHeading").textContent=titles[page][0]; $("editorDescription").textContent=titles[page][1];
+      $("dateField").classList.toggle("hidden",page!=="daily"); renderEntries();
+    }
+    document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+  }
+  async function removeEntry(type,id) {
+    if(!confirm("Delete this entry from the garden?")) return;
+    const {error}=await db.from(tables[type]).delete().eq("id",id);
+    if(error) { alert(error.message); return; }
+    await refreshAll();
+  }
+
+  $("loginForm").addEventListener("submit",async e=>{
+    e.preventDefault(); $("loginBtn").disabled=true; $("loginBtn").textContent="Opening the garden…"; msg("loginMessage","");
+    try { await signIn($("email").value.trim(),$("password").value); }
+    catch(err) { msg("loginMessage",err.message,true); }
+    finally { $("loginBtn").disabled=false; $("loginBtn").textContent="Enter the garden ♡"; }
+  });
+  $("logoutBtn").addEventListener("click",async()=>{if(db)await db.auth.signOut();currentUser=null;showLogin();});
+  document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>goPage(b.dataset.page)));
+  $("newEntryBtn").addEventListener("click",clearForm);
+  $("cancelBtn").addEventListener("click",clearForm);
+  $("entryForm").addEventListener("submit",async e=>{
+    e.preventDefault(); if(!db)return;
+    $("saveBtn").disabled=true; msg("formMessage","Saving your note…");
+    const row={title:$("entryTitle").value.trim(),content:$("entryContent").value.trim(),is_published:$("published").checked,updated_at:new Date().toISOString()};
+    if(currentType==="daily") row.note_date=$("entryDate").value || new Date().toISOString().slice(0,10);
+    try {
+      const query=editingId?db.from(tables[currentType]).update(row).eq("id",editingId):db.from(tables[currentType]).insert(row);
+      const {error}=await query; if(error)throw error;
+      msg("formMessage","Saved to the garden ♡"); clearForm(); await refreshAll();
+    } catch(err) { msg("formMessage",err.message,true); }
+    finally {$("saveBtn").disabled=false;}
+  });
+  if(db) db.auth.getSession().then(async({data})=>{
+    if(data.session) {
+      currentUser=data.session.user;
+      if(currentUser.id===ADMIN_USER_ID){showApp();await refreshAll();}
+      else {await db.auth.signOut();showLogin();}
+    }
+  });
+})();
+</script>
+</body>
+</html>
